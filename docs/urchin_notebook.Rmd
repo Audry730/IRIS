@@ -32,7 +32,7 @@ Vous devez proposer au minimum 2 graphiques et au maximum 4 graphiques afin d'ex
 --->
 ```{r nuage de points 1, include=TRUE}
 chart(data = urchin, height ~ weight %col=% origin) +
-  geom_point()
+   geom_point()
 ```
   
 On voit que ce sont les oursins de fermes qui seront les plus développés.  
