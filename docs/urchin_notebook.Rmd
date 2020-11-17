@@ -35,7 +35,8 @@ chart(data = urchin, height ~ weight %col=% origin) +
    geom_point()
 ```
   
-On voit que ce sont les oursins de fermes qui seront les plus développés.  
+On voit que ce sont les oursins de fermes qui seront les plus lourds. La preière hypothèse est donc de se dire que les oursins élevés en ferme auront moins de contraintes à combattre.
+
 
 ## Visualisation II : distribution
 
@@ -49,7 +50,7 @@ chart(data = urchin, ~ weight %fill=% origin) +
   ylab("Effectifs")
 ```
   
-Les oursins qui ont grandis en milieu naturel n'auront pas une aussi grande masse maximale que ceux qui ont grandis dans une ferme.  
+Les oursins qui ont grandis en milieu naturel n'auront pas une aussi grande masse (hors masse squelettique) maximale que ceux qui ont grandis dans une ferme.
 
 ## Visualisation III : graphique en barre et boite de dispersion 
 
@@ -68,7 +69,7 @@ b <- chart(data = urchin, height ~ origin) +
 combine_charts(list(a, b), common.legend = TRUE)
 ```
   
-On peut voir içi que que ceux issus de la pêche ont une taille un tout petit peu plus petite mais ceux élevés ont une masse beaucoup plus importante !
+On peut voir içi que que ceux issus de la pêche ont une taille un tout petit peu plus petite mais ceux élevés en ferme ont une masse beaucoup plus importante !
 
 ```{r barre et disp 2, include=TRUE}
 give_n <- function(x)
@@ -79,7 +80,7 @@ chart(data = urchin, weight ~ origin) +
   stat_summary(fun.data = give_n, geom = "text", hjust = 0.5)
 ```
   
-Grace à ce graphique on peut avoir une idée de quelle méthode est la plus rentable. Si on veut les oursins les plus gros pour les manger par exemple ceux de ferme seront mieux, à voir si le skelette ou une autre partie de l'oursin non commestible ne fausse pas ce résultat.
+Grace à ce graphique on peut avoir une idée de quelle méthode est la plus rentable. Si on veut les oursins les plus gros. Dans ce cas ci, ceux des fermes soront les plus rentables à utiliser.Reste maintenant à voir si le squelette ou une autre partie non commestible de l'oursin ne fausse pas ce résultat.
 
 ## Transformation des données I et II
 
