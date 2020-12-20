@@ -1,7 +1,7 @@
 ---
 title: "Les oursins violets"
-author: '...'
-date: "..."
+author: 'Florian Cosa et Audry Deschuyteneer'
+date: "20-12-2020"
 output: html_document
 ---
 
@@ -9,13 +9,21 @@ output: html_document
 SciViews::R
 ```
 
+```{r setup 2, include=FALSE}
+urchin <- data.io::read("urchin_bio", package = "data.io")
+```
+
 # Introduction
+
+Ce document va parler des oursins violets et plus particulièrement du *Paracentrotus lividus* Lamarck (1816). C'est un oursin faisant partie de la famille des Parechinidae et se trouve en Méditerranée. On le connait surtout car il est comestible et réputé. Il peut faire jusqu'à 8 cm de diamètre et généralement violet vu son nom. Il vit entre la surface et jusqu'à 80m de profondeur, on le trouve souvent sur des rochers mais reste souvent caché la journée. Il possède des épines mais il n'est pas venimeux. Il a une grande importance dans les écosystèmes et dans le commerce, il est capable d'accumuler des polluants mais sa population à tendance à diminuer.
 
 <!---
 Présentez les organismes de cette étude. Vous devez être synthétique entre 5 et 10 phrases.
 --->
 
 # But
+
+Nous allons nous intéresser au rendement des fermes à oursins et voir si leur milieu de croissance influence leur dévoloppement et comment.
 
 <!---
 Présentez votre but.Vous devez être synthétique entre 2 et 5 phrases. 
@@ -25,11 +33,42 @@ Un lecteur doit être capable de comprendre l'intérêt de votre travail après 
 
 # M&M
 
+Nous utilisons une fusion du code R et du language Markdown, le Rmarkdown. Avec ceci on peut éditer notre texte et créer des graphiques, tableaux à partir de jeux de données choisis et les modifier quand et comme on veut. 
+
 <!---
 Présentez les outils informatiques que vous utilisez. Soyez précis
 --->
 
 # Résultats
+
+```{r nuage de points 1, include=TRUE}
+chart$xyplot(urchin, height ~ weight | origin,
+  xlab = "Masse [g]", ylab = "Hauteur [mm]")
+```
+  
+On voit que ce sont les oursins de fermes qui seront les plus lourds. La preière hypothèse est donc de se dire que les oursins élevés en ferme auront moins de contraintes à combattre.
+
+```{r distribution 1, include=TRUE}
+chart(data = urchin, ~ weight %fill=% origin) +
+  geom_histogram(bins = 25, na.rm = TRUE) +
+  ylab("Effectifs")
+```
+  
+Les oursins qui ont grandis en milieu naturel n'auront pas une aussi grande masse (hors masse squelettique) maximale que ceux qui ont grandis dans une ferme.
+
+```{r barre et disp 1, include=TRUE}
+a <- chart(data = urchin, weight ~ origin) +
+  stat_summary(geom = "col", fun = "mean") +
+  xlab("Origine")
+
+b <- chart(data = urchin, height ~ origin) +
+  stat_summary(geom = "col", fun = "mean") +
+  xlab("Origine")
+
+combine_charts(list(a, b), common.legend = TRUE)
+```
+  
+On peut voir içi que que ceux issus de la pêche ont une taille un tout petit peu plus petite mais ceux élevés en ferme ont une masse beaucoup plus importante !
 
 <!---
 Cette section doit proposer des graphiques, tableaux et analyses qui proviennent du notebook de ce projet et que vous considérez comme pertinent pour répondre à la question que vous vous posez.

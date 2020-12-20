@@ -83,18 +83,27 @@ chart(data = urchin, weight ~ origin) +
 Grace à ce graphique on peut avoir une idée de quelle méthode est la plus rentable. Si on veut les oursins les plus gros. Dans ce cas ci, ceux des fermes soront les plus rentables à utiliser.Reste maintenant à voir si le squelette ou une autre partie non commestible de l'oursin ne fausse pas ce résultat.
 
 ## Transformation des données I et II
-```{r}
+```{r, include=FALSE}
 rmarkdown::paged_table(urchin)
 ```
 ```{r}
-urchin_select <- mutate(urchin) %>.%
-  select(urchin, "origin", "weight", "solid_parts") %>.%
-  filter(urchin, origin == "Fishery")
-rmarkdown::paged_table(urchin_select)
+urchin %>.%
+  select(., "origin", "weight", "solid_parts") %>.%
+  filter(., origin == "Fishery") -> urchin_fi
+
+mutate(urchin_fi, weight = mean(weight), solid_parts = mean(solid_parts)) -> urchin_fishery
+
+rmarkdown::paged_table(urchin_fishery)
 ```
 
 ```{r}
+urchin %>.%
+  select(., "origin", "weight", "solid_parts") %>.%
+  filter(., origin == "Farm") -> urchin_fa
 
+mutate(urchin_fa, weight = mean(weight), solid_parts = mean(solid_parts)) -> urchin_farm
+
+rmarkdown::paged_table(urchin_farm)
 ```
 
 <!---
