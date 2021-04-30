@@ -76,11 +76,12 @@ Grace à ce graphique on peut avoir une idée de quelle méthode est la plus ren
 
 
 ## Transformation des données I et II
-```{r}
+```{r, include=FALSE}
 rmarkdown::paged_table(urchin)
 ```
 
 ```{r}
+<<<<<<< HEAD
 urchin_select <- mutate(urchin) %>.%
   select(., "origin", "weight", "solid_parts", "sex")
 rmarkdown::paged_table(urchin_select)
@@ -90,6 +91,25 @@ rmarkdown::paged_table(urchin_select)
 urchin_select <- mutate(urchin_select,
   Masse_chaire = weight - solid_parts)
 rmarkdown::paged_table(urchin_select)
+=======
+urchin %>.%
+  select(., "origin", "weight", "solid_parts") %>.%
+  filter(., origin == "Fishery") -> urchin_fi
+
+mutate(urchin_fi, weight = mean(weight), solid_parts = mean(solid_parts)) -> urchin_fishery
+
+rmarkdown::paged_table(urchin_fishery)
+```
+
+```{r}
+urchin %>.%
+  select(., "origin", "weight", "solid_parts") %>.%
+  filter(., origin == "Farm") -> urchin_fa
+
+mutate(urchin_fa, weight = mean(weight), solid_parts = mean(solid_parts)) -> urchin_farm
+
+rmarkdown::paged_table(urchin_farm)
+>>>>>>> 3375ce70847008250b54ddeddae443745c9304bd
 ```
 
 ```{r}
