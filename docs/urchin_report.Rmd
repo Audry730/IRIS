@@ -23,7 +23,7 @@ Présentez les organismes de cette étude. Vous devez être synthétique entre 5
 
 # But
 
-Nous allons nous intéresser au rendement des fermes à oursins et mettre en évidence le lien entre milieu de croissance et rendement. Le rendement est calculé à partir des données présentes dans le package urchin. Le calcul se réalise en soustrayant la masse des parties solides à la masse totale. De cette façon, il ne restera que la masse de chaires de l'oursin.
+Nous allons nous intéresser au rendement des fermes à oursins et mettre en évidence le lien entre milieu de croissance, sex et rendement. Le rendement est calculé à partir des données présentes dans le package urchin. Le calcul se réalise en soustrayant la masse des parties solides à la masse totale. De cette façon, il ne restera que la masse de chaires de l'oursin. Ensuite, nous regarderons si le sex influence de manière significative la masse de chaire afin de voir si il est préférable d'élever ou de pêcher des oursins mâles ou femelles.
 
 <!---
 Présentez votre but.Vous devez être synthétique entre 2 et 5 phrases. 
@@ -55,20 +55,6 @@ chart(data = urchin, ~ weight %fill=% origin) +
 ```
   
 Ce second graphe permet de mieux visualiser la répartition. En effet, ici, nous remarquons que les oursins élevés en ferme ont en général une masse plus grande que ceux élevés naturellement.
-
-```{r barre et disp 1, include=TRUE}
-a <- chart(data = urchin, weight ~ origin) +
-  stat_summary(geom = "col", fun = "mean") +
-  xlab("Origine")
-
-b <- chart(data = urchin, height ~ origin) +
-  stat_summary(geom = "col", fun = "mean") +
-  xlab("Origine")
-
-combine_charts(list(a, b), common.legend = TRUE)
-```
-  
-Le troisième graphe permet de visualiser les différneces de tailles qui existent entre oursins élevés et oursins pêchés. On remarque que les oursins pêchés sont plus petits que ceux élevés.
 
 <!---
 Cette section doit proposer des graphiques, tableaux et analyses qui proviennent du notebook de ce projet et que vous considérez comme pertinent pour répondre à la question que vous vous posez.
