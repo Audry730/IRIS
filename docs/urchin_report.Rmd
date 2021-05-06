@@ -23,7 +23,7 @@ Présentez les organismes de cette étude. Vous devez être synthétique entre 5
 
 # But
 
-Nous allons nous intéresser au rendement des fermes à oursins et voir si leur milieu de croissance influence leur dévoloppement et comment.
+Nous allons nous intéresser au rendement des fermes à oursins et mettre en évidence le lien entre milieu de croissance et rendement. Le rendement est calculé à partir des données présentes dans le package urchin. Le calcul se réalise en soustrayant la masse des parties solides à la masse totale. De cette façon, il ne restera que la masse de chaires de l'oursin.
 
 <!---
 Présentez votre but.Vous devez être synthétique entre 2 et 5 phrases. 
@@ -46,7 +46,7 @@ chart$xyplot(urchin, height ~ weight | origin,
   xlab = "Masse [g]", ylab = "Hauteur [mm]")
 ```
   
-On voit que ce sont les oursins de fermes qui seront les plus lourds. La preière hypothèse est donc de se dire que les oursins élevés en ferme auront moins de contraintes à combattre.
+Un premier graphique comparant la masse d'oursins élevés en ferme et pêchés permet de remarquer que les deux types d'oursins ont à première vue des masses environ similaires. Il faut maintenant vérifier si la masse est principalement composée de parties solides ou de chaire.
 
 ```{r distribution 1, include=TRUE}
 chart(data = urchin, ~ weight %fill=% origin) +
@@ -54,7 +54,7 @@ chart(data = urchin, ~ weight %fill=% origin) +
   ylab("Effectifs")
 ```
   
-Les oursins qui ont grandis en milieu naturel n'auront pas une aussi grande masse (hors masse squelettique) maximale que ceux qui ont grandis dans une ferme.
+Ce second graphe permet de mieux visualiser la répartition. En effet, ici, nous remarquons que les oursins élevés en ferme ont en général une masse plus grande que ceux élevés naturellement.
 
 ```{r barre et disp 1, include=TRUE}
 a <- chart(data = urchin, weight ~ origin) +
@@ -68,7 +68,7 @@ b <- chart(data = urchin, height ~ origin) +
 combine_charts(list(a, b), common.legend = TRUE)
 ```
   
-On peut voir içi que que ceux issus de la pêche ont une taille un tout petit peu plus petite mais ceux élevés en ferme ont une masse beaucoup plus importante !
+Le troisième graphe permet de visualiser les différneces de tailles qui existent entre oursins élevés et oursins pêchés. On remarque que les oursins pêchés sont plus petits que ceux élevés.
 
 <!---
 Cette section doit proposer des graphiques, tableaux et analyses qui proviennent du notebook de ce projet et que vous considérez comme pertinent pour répondre à la question que vous vous posez.

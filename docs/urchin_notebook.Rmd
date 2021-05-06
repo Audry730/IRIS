@@ -81,7 +81,6 @@ rmarkdown::paged_table(urchin)
 ```
 
 ```{r}
-<<<<<<< HEAD
 urchin_select <- mutate(urchin) %>.%
   select(., "origin", "weight", "solid_parts", "sex")
 rmarkdown::paged_table(urchin_select)
@@ -91,7 +90,6 @@ rmarkdown::paged_table(urchin_select)
 urchin_select <- mutate(urchin_select,
   Masse_chaire = weight - solid_parts)
 rmarkdown::paged_table(urchin_select)
-=======
 urchin %>.%
   select(., "origin", "weight", "solid_parts") %>.%
   filter(., origin == "Fishery") -> urchin_fi
@@ -109,7 +107,6 @@ urchin %>.%
 mutate(urchin_fa, weight = mean(weight), solid_parts = mean(solid_parts)) -> urchin_farm
 
 rmarkdown::paged_table(urchin_farm)
->>>>>>> 3375ce70847008250b54ddeddae443745c9304bd
 ```
 
 ```{r}
@@ -129,13 +126,11 @@ H1 : 1/2 des oursins ont une masse de chaire < 0.05
 
 ```{r}
 urchin_filter <- filter(urchin_select, origin == "Farm")
-rmarkdown::paged_table(urchin_select)
-```
-
-```{r}
 urchin_filter <- drop_na(urchin_filter)
 rmarkdown::paged_table(urchin_filter)
 ```
+
+
 
 
 
@@ -145,9 +140,16 @@ Si la réalisation d'un test de chi^2^ se prête à vos données, réalisé au m
 ---> 
 
 ## Moyenne 
-
+Le but du test de student dans notre cas est de mettre en évidence le lien entre sex et masse de chaire pour voir si il est plus interessant d'élever des mâles ou des femelles. Pour notre test nous posons la valeur alpha à 5%.
+H0 : Masse de chaire des mâles = masse de chaire des femelles.
+H1: Masse de chaire des mâles diffère de la masse de chaire des femelles.
+```{r}
+t.test(data = urchin_filter, Masse_chaire ~ sex,
+  alternative = "two.sided", conf.level = 0.95, var.equal = TRUE)
+```
+La valeur p est suppérieur à alpha, nous ne rejettons pas H0 donc le sex n'influence pas la masse de chaire des oursins élevés au seuil alpha de 5%(test t bilatéral, t = -0.95, ddl = 95, valeur P = 0.3432).
 <!---
-Si la réalisation d'un test de Student se prête à vos données, réalisé au minimum 1 et au maximum 2 tests. Commentez les en maximum 5 phrases.
+Si la réalisation d'un test de Student se prête à vos données, réalisez au minimum 1 et au maximum 2 tests. Commentez les en maximum 5 phrases.
 ---> 
 
 ## Variance I
